@@ -1,0 +1,16 @@
+<h1>A normal 3-column UI with order status, total, and
+total invoiced amount on the page instead of returning the json.</h1>
+<hr>
+<?php $result = $block->getOrderData(); ?>
+<?php echo 'Order status: ' .  $result['status'] . '<br>'; ?>
+<?php echo 'Order total: ' .  $result['grand_total'] . '<br>'; ?>
+<?php echo 'Total invoiced: ' . $result['total_invoiced'] . '<br>'; ?>
+<p>Order Items:</p>
+<?php foreach ($result['order_items'] as $key => $item) {
+	echo 'Item no.' . ($key+1) . ':'. '<br>';
+	echo 'sku: ' . $item['sku'] . '<br>';
+	echo 'item_id: ' . $item['item_id'] . '<br>';
+	echo 'price: ' . $item['price'];
+}
+?>
+<?php //var_dump($result); ?>

@@ -1,0 +1,55 @@
+define(["jquery"], function($) {
+    'use strict';
+    return {
+        wstLoadFavorites: function() {
+            $('.favorites-not-logged-in').hide();
+            $('.favorites-logged-in').show();
+            var favs = JSON.parse('<?php echo $block->getFavoriteIdsJson() ?>');
+            favs.each(function(value) {
+                $('#favorite-product-id' + value).addClass("red");
+                $('#favor' + value).html('Remove From');
+            });
+        },
+    //     wstLoadFavoritesQuickView(): function () {
+    // //     '<?php if ($block->isCustomerLoggedIn()): ?>''
+    // //         $('.favorites-not-logged-in').hide();
+    // //         $('.favorites-logged-in').show();
+    // //         favs.each(function(value){
+    // //             $('#qw' + value).addClass("red");
+    // //             $('#qwfavor' + value).html('Remove From');
+    // //         });
+    // //     '<?php endif; ?>''
+    //     },
+        productSubmitToFavorites: function(obj) {
+            var product = $(obj).data('product');
+
+            $.ajax({
+                url : "<?php echo $block->getBaseUrl(); ?>" + 'favorites/index/submit/',
+                type: 'POST',
+                datatype: 'json',
+                data : {product: product},
+                success: function(data, response)
+                {
+                    $('#favorite-product-id' + product).toggleClass("red");
+                    $('#qw' + product).toggleClass("red");
+                    ($('#favor' + product).text() === "Add To") ? $('#favor' + product).text('Remove From') : $('#favor' + product).text("Add To");
+                    ($('#qwfavor' + product).text() === "Add To") ? $('#qwfavor' + product).text('Remove From') : jQuery('#qwfavor' + product).text("Add To");
+
+                    favs = JSON.parse(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log("Error: " + errorThrown);
+                }
+            });
+            return false;
+        },
+        showDivtest: function() {
+          alert("I am here");
+        }
+    }
+
+    
+});
+
+

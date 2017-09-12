@@ -1,0 +1,111 @@
+<?php
+/**
+ * Carousel template for product collection widget
+ *
+ * @category design
+ * @package sportzone_default
+ * @author mkarapan <mkarapan@westum.com>
+ */
+?>
+<?php
+if ($exist = ($this->getBestsellerProduct() && $this->getBestsellerProduct()->getPageSize())) {
+    $fet_prodcollection = $this->getBestsellerProduct();
+    $productcount = $this->getProductLimit();
+    $imagewidth = $this->getProductimagewidth();
+    $imageheight = $this->getProductimageheight();
+    $mode = 'grid';
+    $title = __('Bestselling Products');
+    $type = 'widget-bestseller-grid';
+    $image = 'bestseller_products_content_widget_grid';
+}
+?>
+
+<?php $carosuelId = substr(str_shuffle(MD5(microtime())), 0, 5); ?>
+<?php if ($exist): ?>
+<div class="widget widget-new-products slider">
+    <div class="widget-title">
+        <h2><?php echo $title?></h2>
+    </div>
+    <div class="widget-products" >
+        <ul class="products-grid new-products carouFredSel jcarousel-skin-tango first last odd" id="jCarousell_<?php echo $carosuelId ?>">
+        <?php $i=0; foreach ($fet_prodcollection->getItems() as $item):
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $_product = $objectManager->get('Magento\Catalog\Model\Product')->load($item->getProductId());
+        ?>
+            <li class="item">
+                <div class="product-image-column" style="position: relative;">
+                    <?php
+
+                    $image_url = $block->imageHelperObj()->init($_product, 'product_page_image_small')
+                        ->setImageFile($_product->getFile())
+                        ->resize($imagewidth,$imageheight)
+                        ->getUrl();
+
+                    ?>
+            	   <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_product->getName(); ?>" class="product-image"><img src="<?php echo  $image_url;?>" width="150" height="150" alt="<?php echo $_product->getName(); ?> " /></a>
+                </div>
+                <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_product->getName() ?>)"><?php echo $_product->getName() ?></a></h3>
+                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                <?php echo $this->getProductPriceHtml($_product,  true, '-widget-new-grid'); ?>
+                <div class="actions">
+                    <?php if ($_product->isSaleable()): ?>
+                        <button class="button btn-cart"
+                                data-mage-init='{"redirectUrl":{"url":"<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_product) ?>"}}'
+                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+                             <span><span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span></span>
+                        </button>
+                    <?php else: ?>
+                        <?php if ($_product->getIsSalable()): ?>
+                            <p class="availability in-stock"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+        <a class="sliderarrows prev" id="foo2_prev_<?php echo $carosuelId?>" href="#"></a>
+        <a class="sliderarrows next" id="foo2_next_<?php echo $carosuelId?>" href="#"></a>
+    </div>
+ <!--<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>-->
+<script type="text/javascript">
+// jQuery(document).ready(function(){
+// 	carouselId =  '#jCarousell_' + '<?php echo $carosuelId?>';
+// 	jQuery(carouselId).jcarousel({
+// 		scroll: <?php echo $this->getColumnCount()?>,
+// 		visible: <?php echo $this->getColumnCount()?>
+//     });
+// });
+
+
+//         scroll: <?php echo $this->getColumnCount()?>,
+//         visible: <?php echo $this->getColumnCount()?>
+
+jQuery(document).ready(function(){
+    carouselId =  '#jCarousell_' + '<?php echo $carosuelId?>';
+
+    jQuery(carouselId).carouFredSel({
+        items               : 3,
+        direction           : "left",
+        width               : "590",
+        height              : "400",
+        infinite            : true,
+        auto                : true,
+        scroll : {
+            duration        : 1000, 
+            // fx              : "",
+            pauseOnHover    : true
+        },
+        prev : {
+            button : "#foo2_prev_<?php echo $carosuelId?>",
+            key : "left"
+        },
+        next : { 
+            button : "#foo2_next_<?php echo $carosuelId?>",
+            key : "right"
+        }
+    });
+  });
+</script>
+<?php endif; ?>

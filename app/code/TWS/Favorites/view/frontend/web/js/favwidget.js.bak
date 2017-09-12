@@ -1,0 +1,44 @@
+define(["jquery", "favorites"], function($) {
+    'use strict';
+        //creating jquery widget
+        $.widget('favwidget.js', {
+            _create: function() {
+ 
+                //options which you can pass from js.phtml file in json format
+                //logger.log(this.options);
+ 
+                //access to element p#test
+                //logger.log(this.element);
+ 
+                //for exmple, you can create some click event or something else
+                this.element.on('click', function(e){
+                    var product = this.options.product;
+alert(this.options);
+                    $.ajax({
+                        url : 'http://127.0.0.1/magento2novi/index.php/' + 'favorites/index/submit/',
+                        type: 'POST',
+                        datatype: 'json',
+                        data : {product: product},
+                        success: function(data, response)
+                        {
+                            $('#favorite-product-id' + product).toggleClass("red");
+                            $('#qw' + product).toggleClass("red");
+                            ($('#favor' + product).text() === "Add To") ? $('#favor' + product).text('Remove From') : $('#favor' + product).text("Add To");
+                            ($('#qwfavor' + product).text() === "Add To") ? $('#qwfavor' + product).text('Remove From') : jQuery('#qwfavor' + product).text("Add To");
+
+                            favs = JSON.parse(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            console.log("Error: " + errorThrown);
+                        }
+                    });
+                    return false;
+                }
+ 
+        });
+ 
+    return $.favwidget.js;
+});
+
+

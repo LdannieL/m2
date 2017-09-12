@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/e
+tc/config.xsd">
+    <preference for="Training5\VendorRepository\Api\VendorRepositoryInterface"
+                type="Training5\VendorRepository\Model\VendorRepository"/>
+    <preference for="Training5\VendorRepository\Api\Data\VendorInterface"
+                type="Training4\Vendor\Model\Vendor"/>
+    <preference for="Training5\VendorRepository\Api\Data\VendorSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+</config>

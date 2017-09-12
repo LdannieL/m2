@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/layout_generic.xsd">
+	<referenceContainer name="content">
+		<block template="vendor.phtml" class="Training4\Vendor\Block\Vendor" name="training4_vendor_block_vendor"/>
+	</referenceContainer>
+</layout>

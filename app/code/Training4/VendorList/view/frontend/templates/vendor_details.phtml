@@ -1,0 +1,12 @@
+<?php $vendor = $this->getVendor(); ?>
+<?php $products = $this->getProducts(); ?>
+<h1><?php echo 'Vendor Id: ' . $vendor->getId() .  '  Vendor Name: ' . $vendor->getName(); ?></h1>
+<hr>
+<h2>Associated Products: </h2>
+<ul>
+<?php foreach ($products as $product) {
+	echo '<li>' . $product . '</li>';
+	//var_dump($products);
+} 
+?>
+</ul>

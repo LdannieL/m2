@@ -1,0 +1,8 @@
+<p style="display: none;" class="favorites-logged-in">
+	<a href="#" class="link-compare" id="favorites[<?php echo $block->getParentBlock()->getProduct()->getId(); ?>]" data-bind="event: {click : favorite.selectProduct}, product: <?php echo $block->getParentBlock()->getProduct()->getId(); ?>"
+                   
+    >
+	    <i id="favorite-product-id<?php echo $block->getParentBlock()->getProduct()->getId(); ?>" class="fa fa-star"></i>
+	</a>
+</p>
+<p class="favorites-not-logged-in"><a class="sign-up logged-in-link link-compare favPopup" href="<?php echo $block->getBaseUrl(); ?>customer/account/login" ><i class="fa fa-star"></i></a></p>

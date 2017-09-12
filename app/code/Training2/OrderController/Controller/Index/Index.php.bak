@@ -1,0 +1,75 @@
+<?php
+namespace Training2\OrderController\Controller\Index;
+
+use Magento\Framework\App\Action\Context;
+// use Magento\Framework\App\RequestInterface as Request;
+use Magento\Framework\App\Request\Http as Request;
+use Magento\Framework\Controller\Result\JsonFactory;
+// use Magento\Sales\Model\Order;
+use Magento\Sales\Model\OrderFactory;
+
+class Index extends \Magento\Framework\App\Action\Action
+{
+
+    // protected $resultPageFactory;
+    protected $request;
+    protected $resultJsonFactory;
+    private $orderFactory;
+    private $order;
+
+    public function __construct(
+        Context $context,
+        // Http $request,
+        Request $request,
+        // \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        JsonFactory $resultJsonFactory,
+        // Order $order,
+        OrderFactory $orderFactory)
+    {
+        // $this->resultPageFactory = $resultPageFactory; 
+        // $this->result = $result; 
+        $this->request = $request; 
+        $this->resultJsonFactory = $resultJsonFactory;
+        // $this->order = $order;
+        $this->orderFactory = $orderFactory;
+        return parent::__construct($context);
+    }
+    
+    public function execute()
+    {
+        $orderId = $this->request->getParam('order_id');
+        //$orderId = 2;
+        $order = $this->orderFactory->create()->load($orderId);
+//        $order = $this->order->load($orderId);
+        $orderData = array();
+        $orderData['status'] = $order->getStatus();
+        $orderData['grand_total'] = $order->getGrandTotal();
+        $orderData['total_invoiced'] = $order->getTotalInvoiced();
+        $items = $order->getAllItems();
+
+        // Iterate through all of the items in the order
+        foreach ($items as $item) {
+            // Get sku, item_id and price
+            $orderData['order_items'] = [
+                'sku' => $item->getSku(),
+                'item_id' => $item->getId(),
+                'price' => $item->getPrice(),
+            ];
+
+        }
+// var_dump($orderData);exit;
+        try
+        {
+            if ($orderData) {
+                $message = $orderData;
+            }
+        }
+        catch(\Exception $e)
+        {
+            $message = $e;
+        } 
+        // return $this->resultJsonFactory->create()->setData(['Test-Message' => $message]);
+        return $this->resultJsonFactory->create()->setData($message);
+    }
+
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<referenceBlock name="head">
+        <block class="Magento\Theme\Block\Html\Head\Css" name="magento-favorites-css">
+            <arguments>
+                <!-- <argument name="file" xsi:type="string">TWS_Favorites::css/favorites.css</argument> -->
+                <argument name="file" xsi:type="string">css/favorites.css</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+<!-- 	<head>
+        <css src="css/favorites.css" />
+        <script src="js/favorites.js"/>
+    </head>  -->
+    <referenceContainer name="header.panel">
+        <block class="TWS\Favorites\Block\Favorites" name="header.mini.container" template="headerinject.phtml" cacheable="false"/>
+    </referenceContainer>
+</page>

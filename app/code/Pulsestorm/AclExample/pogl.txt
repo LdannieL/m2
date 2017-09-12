@@ -1,0 +1,49 @@
+Programmatically Checking ACL Rules
+
+//If you were playing fast and loose with Magento’s Don’t use the Object Manager guidelines
+$auth = $object_manger->get('Magento\Framework\AuthorizationInterface');
+if($auth->isAllowed('Pulsestorm_AclExample::config'))
+{
+    //user is logged in here
+}
+else
+{
+    //user is not logged in here
+}
+
+ // If you’re not playing fast and loose with Magento’s Don’t use the Object Manager guidelines, you can inject the auth checking object with something like this
+public function __construct(Magento\Framework\AuthorizationInterface $auth)
+{
+    $this->authorization = $auth;
+}
+
+// If you’re in a controller that extends the \Magento\Backend\App\Action controller, you automatically have access to the authorization checking object via the _authorization property.
+namespace Pulsestorm\HelloAdmin\Controller\Adminhtml\Index;
+class Index extends \Magento\Backend\App\Action
+{
+    protected function someControllerMethod()
+    {
+        return $this->_authorization->isAllowed('Pulsestorm_HelloAdmin::pulsestorm_helloadmin_index_index');
+    }            
+
+}
+
+Regarding the controller method above — if you’re injecting additional arguments via the __construct method, don’t forget to include the admin context object (Magento\Backend\App\Action\Context). This context object is where the auth checking object is, itself, instantiated and injected.
+
+class Index extends \Magento\Backend\App\Action
+{
+    protected $resultPageFactory;
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory)
+    {
+        $this->resultPageFactory = $resultPageFactory;        
+        return parent::__construct($context);
+    }
+    //...
+}
+
+Finally, for the curious, in a stock Magento install (circa spring 2016), the Magento\Framework\AuthorizationInterface object type resolves to a Magento\Framework\Authorization object. The class for this object is found here
+
+#File: vendor/magento/framework/Authorization.php
+If you’re having trouble with ACL rule debugging, this is where you’ll want to start.

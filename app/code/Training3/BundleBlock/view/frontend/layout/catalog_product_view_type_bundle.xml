@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/layout_generic.xsd">
+	<referenceContainer name="content">
+		<block class="Training3\BundleBlock\Block\HelloWorld" name="training3_helloworld"/>
+	</referenceContainer>
+</layout>

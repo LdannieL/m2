@@ -1,0 +1,12 @@
+<h1>List of Vendors:</h1>
+<hr>
+<?php $vendors = $block->getVendors(); ?>
+<ul>
+<?php foreach ($vendors as $key => $name) {
+		echo '<li>' . $name . '</li>';
+	}
+?>
+</ul>
+<?php //var_dump($vendors); ?>
+<?php //$id = $block->getProductId(); ?>
+<?php //var_dump($id); ?>

@@ -1,0 +1,35 @@
+<!-- <i id="<?php //echo $block->getParentBlock()->getProduct()->getId();?>" class="fa fa-star" style="color: red; padding-right: 5px;"></i> -->
+<!--     <li><a href="<?php //echo $_compareUrl ?>" class="link-compare">
+     <?php
+        //if ($favoritesHelper->isItemOnFavoritesList($_product->getId()) == "na listi") {
+            //echo '<i class="fa fa-heart" style="color: red; padding-right: 5px;"></i>';
+        //} //else {
+           // echo '<i class="fa fa-heart" style="color: white; padding-right: 5px;"></i>';
+        //}
+    ?>
+    </a></li> -->
+<!--     <script type="text/javascript">
+        requirejs(['jquery','favorites'], function($, favorites){
+            return favorites.productSubmitToFavorites(this);
+        });
+    </script> -->
+<p style="display: none;" class="favorites-logged-in">
+<!-- <script type="text/x-magento-init">// <![CDATA[ { "#favorites[<?php //echo $block->getParentBlock()->getProduct()->getId(); ?>]": { "TWS_Favorites/js/favwidget": {"product":"<?php //echo $block->getParentBlock()->getProduct()->getId(); ?>", "method":"post"} } } // ]]></script> -->
+<!--         <script type="text/javascript">
+            requirejs(['jquery','favorites'], function($, favorites){
+                return favorites.newsubmit();
+            });
+        </script> -->
+	<a href="#" data-mage-init='{"TWS_Favorites/favorites": {"product":"<?php echo $block->getParentBlock()->getProduct()->getId(); ?>"}}' data-product="<?php echo $block->getParentBlock()->getProduct()->getId(); ?>" class="link-compare" id="favorites[<?php echo $block->getParentBlock()->getProduct()->getId(); ?>]"
+                   
+    >
+            <script type="text/javascript">
+                requirejs(['jquery','favorites'], function($, favorites){
+                    favorites.newestsubmit(this);
+                });
+            </script>
+	    <i id="favorite-product-id<?php echo $block->getParentBlock()->getProduct()->getId(); ?>" class="fa fa-star"></i>
+	</a>
+<!--     <script type="text/x-magento-init">// <![CDATA[ { "#favorites[<?php// echo $block->getParentBlock()->getProduct()->getId(); ?>]": { "TWS_Favorites/js/favorites": {"product":"<?php //echo $block->getParentBlock()->getProduct()->getId(); ?>", "method":"post"} } } // ]]></script> -->
+</p>
+<p class="favorites-not-logged-in"><a class="sign-up logged-in-link link-compare favPopup" href="<?php echo $block->getBaseUrl(); ?>customer/account/login" ><i class="fa fa-star"></i></a></p>

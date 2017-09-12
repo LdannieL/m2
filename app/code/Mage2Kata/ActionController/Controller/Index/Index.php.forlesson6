@@ -1,0 +1,141 @@
+<?php
+
+namespace Mage2Kata\ActionController\Controller\Index;
+
+use Mage2Kata\ActionController\Model\Exception\RequiredParametersMissingException;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\Raw as RawResult;
+use Magento\Framework\Controller\Result\RawFactory as RawResultFactory;
+use Magento\Framework\Controller\Result\Redirect as RedirectResult;
+use Magento\Framework\Controller\Result\RedirectFactory as RedirectResultFactory;
+
+class Index extends Action
+{
+    /**
+     * @var RawResultFactory
+     */
+    private $rawResultFactory;
+
+    /**
+     * @var UseCase
+     */
+    private $useCase;
+
+    /**
+     * @var RedirectResultFactory
+     */
+    private $redirectResultFactory;
+
+    public function __construct(Context $context, RawResultFactory $rawResultFactory, UseCase $useCase)
+    {
+        parent::__construct($context);
+        $this->rawResultFactory = $rawResultFactory;
+        $this->useCase = $useCase;
+        $this->redirectResultFactory = $context->getResultRedirectFactory();
+    }
+
+    public function execute()
+    {
+//        return $this->rawResultFactory->create();
+//        return $this->getMethodNotAllowedResult();
+//        if ($this->getRequest()->getMethod() !== 'POST') {
+//            return $this->getMethodNotAllowedResult();
+//        }
+//        try {
+//            $this->useCase->doSomething($this->getRequest()->getParams());
+//        } catch (RequiredParametersMissingException $exception) {
+//            $result = $this->rawResultFactory->create();
+//            $result->setHttpResponseCode(400);
+//            return $result;
+//        }
+//
+//        $result = $this->rawResultFactory->create();
+//        return $result;
+        return !$this->isPostRequest() ?
+            $this->getMethodNotAllowedResult() :
+            $this->processRequestAndRedirect();
+    }
+
+//    /**
+//     * @return RawResult
+//     */
+//    private function getMethodNotAllowedResult()
+//    {
+//        $result = $this->rawResultFactory->create();
+//        $result->setHttpResponseCode(405);
+//        return $result;
+//    }
+
+//    private function processRequestAndRedirect()
+//    {
+//        try {
+//            $this->useCase->doSomething($this->getRequest()->getParams());
+//            $result = $this->rawResultFactory->create();
+//            return $result;
+//        } catch (RequiredParametersMissingException $exception) {
+//            return $this->getBadRequestResult();
+//        }
+//    }
+
+//    private function processRequestAndRedirect()
+//    {
+//        try {
+//            $this->useCase->doSomething($this->getRequest()->getParams());
+//            return $this->redirectResultFactory->create();
+//        } catch (RequiredParametersMissingException $e) {
+//            return $this->getBadRequestResult();
+//        }
+//    }
+
+//    private function processRequestAndRedirect()
+//    {
+//        try {
+//            $this->useCase->doSomething($this->getRequest()->getParams());
+//            $redirect = $this->redirectResultFactory->create();
+//            $redirect->setPath('/');
+//            return $redirect;
+//        } catch (RequiredParametersMissingException $e) {
+//            return $this->getBadRequestResult();
+//        }
+//    }
+
+    /**
+     * @return RawResult|RedirectResult
+     */
+    private function processRequestAndRedirect()
+    {
+        try {
+            $this->useCase->doSomething($this->getRequest()->getParams());
+            return $this->getRedirectResult();
+        } catch (RequiredParametersMissingException $e) {
+            return $this->getBadRequestResult();
+        }
+    }
+
+    private function getMethodNotAllowedResult()
+    {
+        $result = $this->rawResultFactory->create();
+        $result->setHttpResponseCode(405);
+        return $result;
+    }
+
+    private function getBadRequestResult()
+    {
+        $result = $this->rawResultFactory->create();
+        $result->setHttpResponseCode(400);
+        return $result;
+    }
+
+    private function getRedirectResult()
+    {
+        $redirect = $this->redirectResultFactory->create();
+        $redirect->setPath('/');
+        return $redirect;
+    }
+
+    private function isPostRequest()
+    {
+        return $this->getRequest()->getMethod() === 'POST';
+    }
+}

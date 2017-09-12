@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="header.container">
+        <container name="header.favorites" as="header_favorites" label="Favorites Header Container"  htmlTag="header" htmlClass="header-mini-container" after="header.panel.wrapper"/>
+    </referenceContainer>
+<referenceContainer name="header.favorites">
+    <block class="Magento\Framework\View\Element\Template" name="header.mini.container" template="Tws_Favorites::headerinject.phtml"/>
+</referenceContainer>
+<!-- <referenceContainer name="header.favorites">
+    <block class="TWS\Favorites\Block\HeaderInject" name="header.mini.container" template="Tws_Favorites::headerinject.phtml" cacheable="false"/>
+</referenceContainer> -->
+</page>

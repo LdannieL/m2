@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account" />
+    <head>
+        <title>Helpdesk Tickets</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Foggyline\Helpdesk\Block\Ticket\Index" name="foggyline.helpdesk.ticket.index"
+                   template="Foggyline_Helpdesk::ticket/index.phtml" cacheable="false"/>
+        </referenceContainer>
+        <!-- from old training module -->
+        <referenceBlock name="training.render.first" remove="true"/>
+    </body>
+</page>

@@ -1,0 +1,25 @@
+<?php if ($block->isCustomerLoggedIn()): ?>
+    <a id="favlink" href="<?php echo $block->getBaseUrl(); ?>favorites">View <i class="fa fa-star red"></i> Favorites</a>
+	<script type="text/javascript">
+	    requirejs(['jquery','favorites'], function($, favorites){$(function() {
+	    	favorites.showDivtest();
+	    	// $(window).load(function(script) {
+		    // $(document).ready(function(){
+		    	var favs = JSON.parse('<?php echo $block->getFavoriteIdsJson() ?>');
+	            favorites.wstLoadFavorites();
+	        // });
+	    //     $(window).load(function() {
+	    //         $('.flexslider-8').flexslider({
+	    //             animation: "fade",
+	    //             controlNav: "thumbnails",
+	    //             slideshowSpeed: 2000,
+	    //             minItems: 2,
+	    //             maxItems: 4
+	    //         });
+	    //     });
+})
+	    });
+	</script>
+<?php else: ?>
+    <a class="sign-up" id="favlink" href="<?php echo $block->getBaseUrl(); ?>/customer/account/login">View <i class="fa fa-star red"></i> Favorites</a>
+<?php endif; ?>

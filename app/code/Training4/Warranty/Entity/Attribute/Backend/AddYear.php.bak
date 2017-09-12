@@ -1,0 +1,29 @@
+<?php
+
+namespace Training4\Warranty\Entity\Attribute\Backend;
+
+class AddYear extends 
+    \Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend
+    // \Magento\Framework\Data\Form\Element\Text
+{
+    /**
+     * @param \Magento\Framework\Object $object
+     * @return string
+     */
+    // public function getValue(\Magento\Framework\Object $object)
+    // {
+
+    //     $value = parent::getValue($object);
+    //     return $value . ' Year';
+    // }
+
+    public function afterSave($object)
+    {
+        $value = $object->getData($this->getAttribute()->getValue());
+        $object->setData($this->getAttribute()->getValue(), $value . ' Year');
+        $this->getAttribute()->getEntity()->saveAttribute($object, $this->getAttribute()->getValue());
+        return $this;
+
+        //$this->setValue($value . ' Year');
+    }
+}

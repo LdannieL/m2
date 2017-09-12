@@ -1,0 +1,56 @@
+<?php
+/**
+ * Carousel template for product collection widget
+ *
+ * @category design
+ * @package sportzone_default
+ * @author mkarapan <mkarapan@westum.com>
+ */
+?>
+<!--<?php $carosuelId = Mage::helper('productcollectionwidget')->getCarouselId() ?>-->
+<?php if (($_products = $this->getProductCollection()) && $_products->getSize()): ?>
+<div class="widget widget-new-products">
+    <div class="widget-title">
+        <h2><?php echo $this->getCollectionText() ?></h2>
+    </div>
+    <div class="widget-products" >
+        <ul class="products-grid new-products jcarousel-skin-tango" id="jCarousell_<?php echo $carosuelId ?>">
+        <?php $i=0; foreach ($_products->getItems() as $_product): ?>
+            <li class="item">
+                <div class="product-image-column" style="position: relative;">
+            	   <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(85) ?>" width="85" height="85" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
+                </div>
+                <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></h3>
+                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                <?php echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?>
+                <div class="actions">
+                    <?php if ($_product->isSaleable()): ?>
+                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                    <?php else: ?>
+                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                    <?php endif; ?>
+                    <ul class="add-to-links">
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <li><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                        <?php endif; ?>
+                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                            <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	carouselId =  '#jCarousell_' + '<?php echo $carosuelId?>';
+	jQuery(carouselId).jcarousel({
+		scroll: <?php echo $this->getColumnCount()?>,
+		visible: <?php echo $this->getColumnCount()?>
+    });
+});
+</script>
+<?php endif; ?>

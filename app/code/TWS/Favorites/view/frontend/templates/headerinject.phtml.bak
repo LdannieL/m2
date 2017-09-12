@@ -1,0 +1,81 @@
+<!-- 			<div class="favorite">
+				<div class="favorite-title"></div>
+				<div class="favorite-content" style="display: none;">
+					<?php //if($block->isCustomerLoggedIn()):?>
+						<?php //echo $this->getLayout()->createBlock('westum_favorites/main')->setTemplate('westum/favorites/headerinject.phtml')->toHtml(); ?>
+					<?php //else: ?>
+						<div><?php //echo $block->getLayout()->createBlock('cms/block')->setBlockId('wicked-favorites')->toHtml(); ?></div>
+						<?php //echo $block->getLayout()->createBlock('westum_favorites/main')->setTemplate('westum/favorites/headerinject.phtml')->toHtml(); ?>
+					<?php // endif;?>
+				</div>	
+			</div> -->
+
+<!-- <script type="text/javascript">
+    var favs = JSON.parse('<?php echo $block->getFavoriteIdsJson() ?>');
+
+    function wstLoadFavorites() {
+        jQuery('.favorites-not-logged-in').hide();
+        jQuery('.favorites-logged-in').show();
+        favs.each(function(value){
+            jQuery('#favorite-product-id' + value).addClass("red");
+            jQuery('#favor' + value).html('Remove From');
+        });
+    }
+
+    function wstLoadFavoritesQuickView() {
+        <?php if ($customer = Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+            jQuery('.favorites-not-logged-in').hide();
+            jQuery('.favorites-logged-in').show();
+            favs.each(function(value){
+                jQuery('#qw' + value).addClass("red");
+                jQuery('#qwfavor' + value).html('Remove From');
+            });
+        <?php endif; ?>
+    }
+
+    function productSubmitToFavorites(obj) {
+        var product = jQuery(obj).data('product');
+
+        jQuery.ajax({
+            url : '<?php echo Mage::getBaseUrl(); ?>' + 'favorites/index/submit/',
+            type: 'POST',
+            datatype: 'json',
+            data : {product: product},
+            success: function(data, response)
+            {
+                jQuery('#favorite-product-id' + product).toggleClass("red");
+                jQuery('#qw' + product).toggleClass("red");
+                (jQuery('#favor' + product).text() === "Add To") ? jQuery('#favor' + product).text('Remove From') : jQuery('#favor' + product).text("Add To");
+                (jQuery('#qwfavor' + product).text() === "Add To") ? jQuery('#qwfavor' + product).text('Remove From') : jQuery('#qwfavor' + product).text("Add To");
+
+                favs = JSON.parse(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log("Error: " + errorThrown);
+            }
+        });
+        return false;
+    }
+
+    // jQuery(document).ready(function(){
+    //     jQuery('.favPopup').click(function(){
+    //         jQuery('#favTitle').show();
+    //         jQuery('#commonTitle').hide();
+    //         favoritesPopup = false; 
+    //     });
+    // });
+
+
+</script> -->
+
+<?php //if ($block->isCustomerLoggedIn()): ?>
+    <a id="favlink" href="/favorites">View<i class="fa fa-heart red"></i>Favorites</a>
+<!--     <script type="text/javascript">
+        jQuery(document).ready(function(){
+            wstLoadFavorites();
+        });
+    </script> -->
+<?php //else: ?>
+<!--     <a class="sign-up" id="favlink" href="/customer/account/login">View<i class="fa fa-heart red"></i>Favorites</a> -->
+<?php //endif; ?>

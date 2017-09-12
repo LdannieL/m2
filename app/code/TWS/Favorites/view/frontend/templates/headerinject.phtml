@@ -1,0 +1,16 @@
+<?php if ($block->isCustomerLoggedIn()): ?>
+    <a id="favlink" href="<?php echo $block->getBaseUrl(); ?>favorites">View <i class="fa fa-star red"></i> Favorites</a>
+	<script type="text/javascript">
+	    requirejs(['jquery','favorites'], function($, favorites){
+	    	// alert("123");
+	    	$(document).ready(function(){
+	    		var favs = <?php echo $block->getFavoriteIdsJson() ?>;
+	    		// alert(favs);
+	    		//favorites.showDivtest();
+	            favorites.wstLoadFavorites(favs);
+	        })
+	    });
+	</script>
+<?php else: ?>
+    <a class="sign-up" id="favlink" href="<?php echo $block->getBaseUrl(); ?>/customer/account/login">View <i class="fa fa-star red"></i> Favorites</a>
+<?php endif; ?>

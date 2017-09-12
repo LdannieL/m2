@@ -1,0 +1,15 @@
+SELECT * FROM `eav_attribute` WHERE `attribute_code` in ('flavor_from_setup_method', 'example_multiselect','priority','warranty', 'warranty1');
+
+
+- Add Foreign keys on training4_vendor2product table
+- Refactor methods getProducts and get Vendors to be more Magento like, use addField to Filter instead of where (product in ()) etc.
+- Correct Backend model for Warranty
+
+
+curl -X POST "http://127.0.0.1/magento2novi/index.php/rest/V1/integration/admin/token" -H "Content-Type:application/json" -d '{"username":"admin","password":"admin123"}'
+
+curl -X POST "http://127.0.0.1/magento2novi/index.php/rest/V1/integration/admin/token" -H "Content-Type:application/json" -d '{"username":"admin","password":"admin123"}'
+
+curl -X GET "http://127.0.0.1/magento2novi/index.php/rest/V1/customers/1"\-H"Authorization: Bearer 8fa1njjfq7mpmtbmq44tegiojwwte30j"
+
+curl -X POST "http://127.0.0.1/magento2novi/index.php/rest/V1/integration/admin/token"‌​; \ -H "Content-Type:application/json" \ -d '{"username":"admin", "password":"admin123"}' 

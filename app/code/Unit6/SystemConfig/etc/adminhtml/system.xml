@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="catalog" translate="label" sortOrder="200">
+            <label>Catalog</label>
+        </tab>
+        <section id="general">
+            <group id="Unit6" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Unit6 Fields</label>
+                <field id="test" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Test Field</label>
+                    <comment>This is a test dropdown</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="custom" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom Template</label>
+                    <comment>This is a field with custom code</comment>
+                    <frontend_model>Unit6\SystemConfig\Block\Config\Custom</frontend_model>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

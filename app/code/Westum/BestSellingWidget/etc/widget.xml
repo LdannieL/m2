@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+    <widget id="westum_bestsellingwidget2" class="Westum\BestSellingWidget\Block\Bestsellerx">
+        <label translate="true">Bestseller Product Widget</label>
+        <description>Westum Bestselling Product Widget</description>
+        <parameters>
+            <parameter name="productcount" xsi:type="text"  visible="true" sort_order="1" >
+                <label translate="true">Product Count</label>
+            </parameter>
+            <parameter name="imagewidth" xsi:type="text"  visible="true" sort_order="2" >
+                <label translate="true">Image Width</label>
+            </parameter>
+            <parameter name="imageheight" xsi:type="text"  visible="true" sort_order="3" >
+                <label translate="true">Image Height</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+ <!---->
+<!--<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">-->
+	<!--<widget id="westum_bestsellingwidget" class="Westum\BestSellingWidget\Block\Product\Widget\Collection">-->
+		<!--<label translate="true">Best Selling Products Widget</label>-->
+		<!--<description>List of best selling products</description>-->
+		<!--<parameters>-->
+			<!--<parameter name="unique_id" xsi:type="text"  visible="true" sort_order="0" >-->
+				<!--<label translate="true">Unique Id</label>-->
+			<!--</parameter>-->
+			<!--<parameter name="group_related" xsi:type="select"  visible="true" sort_order="10" source_model="Magento\AdminNotification\Model\Config\Source\Yesno">-->
+				<!--<label translate="true">Filter By Group for Logged Customers</label>-->
+			<!--</parameter>-->
+			<!--<parameter name="query_type" xsi:type="select" visible="true" sort_order="10" >-->
+				<!--<label translate="true">Filter by Items Quantity or Number of Orders</label>-->
+			<!--</parameter>-->
+		<!--</parameters>-->
+	<!--</widget>-->
+<!--</widgets>-->

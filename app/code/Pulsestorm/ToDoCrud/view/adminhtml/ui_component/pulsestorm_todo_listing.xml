@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">pulsestorm_todo_listing.pulsestorm_todo_listing_data_source</item>
+            <item name="deps" xsi:type="string">pulsestorm_todo_listing.pulsestorm_todo_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">pulsestorm_todo_listing_columns</item>
+    </argument>
+    <dataSource name="pulsestorm_todo_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Pulsestorm\ToDoCrud\Ui\Component\Listing\DataProviders\Pulsestorm\Todo\Listing</argument>
+            <argument name="name" xsi:type="string">pulsestorm_todo_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pulsestorm_todocrud_todoitem_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pulsestorm_todocrud_todoitem_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <columns name="pulsestorm_todo_listing_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">pulsestorm_todocrud_todoitem_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="pulsestorm_todocrud_todoitem_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+        <!-- If you want to add a column for the model’s title attribute -->
+        <column name="item_text">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Item Title</item>
+                    <!-- <item name="sortOrder" xsi:type="number">20</item> -->
+                </item>
+            </argument>
+        </column>        
+        <actionsColumn name="actions" class="Pulsestorm\ToDoCrud\Ui\Component\Listing\Column\Pulsestormtodolisting\PageActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">pulsestorm_todocrud_todoitem_id</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+    <!-- Throws an error with 'listingToolbar', I changed to 'container' -->
+    <container name="listing_top">
+        <paging name="listing_paging"/>
+    </container>
+<!--     <listingToolbar name="listing_top">
+        <paging name="listing_paging"/>
+    </listingToolbar> -->
+</listing>

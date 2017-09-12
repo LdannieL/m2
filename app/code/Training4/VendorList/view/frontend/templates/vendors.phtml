@@ -1,0 +1,37 @@
+<?php if ($this->getPagerHtml()): ?>
+	<div class="order-products-toolbar toolbar bottom custom-pager">
+		<?php echo $this->getPagerHtml(); ?>
+	</div>
+<?php endif?>
+<?php $vendors = $this->getVendors(); ?>
+<?php if ($vendors && count($vendors)): ?>
+	<div class="table wrapper orders-history">
+		<table class="data table table-order-items history" id="my-orders-table">
+			<caption class="table-caption"><?php echo __('Vendors Grid'); ?></caption>
+			<thead>
+			<tr>
+				<th scope="col" class="col id"><?php echo __('ID #'); ?></th>
+				<th scope="col" class="col title"><?php echo __('Name '); ?></th>
+				<th scope="col" class="col ">&nbsp</th>
+			</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($vendors as $vendor): ?>
+				<tr>
+					<td scope="col" class="col id"><?php echo $vendor->getVendorId(); ?></td>
+					<td scope="col" class="col title"><a href="<?php echo $this->getBaseUrl() .'vendor_list/view/index/vendor_id/'. $vendor->getVendorId(); ?>"><?php echo $vendor->getName(); ?></a></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+<?php if ($this->getPagerHtml()): ?>
+	<div class="order-products-toolbar toolbar bottom custom-pager">
+		<?php echo $this->getPagerHtml(); ?>
+	</div>
+<?php endif?>
+<?php else: ?>
+<div class="message info empty">
+	<span><?php echo __('Records are not available.'); ?></span>
+</div>
+<?php endif; ?>
